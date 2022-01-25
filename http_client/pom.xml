@@ -8,13 +8,13 @@
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>fp</artifactId>
+    <artifactId>http_client</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>${io.projectreactor.reactor-core.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -28,6 +28,11 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <version>${io.projectreactor.reactor-test.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>
