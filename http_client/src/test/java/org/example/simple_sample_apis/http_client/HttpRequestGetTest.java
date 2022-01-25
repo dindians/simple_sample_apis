@@ -35,14 +35,14 @@ final class HttpRequestGetTest {
           () -> assertNull(httpResponse.asFailure()),
           () -> assertEquals(200, httpResponse.asSuccess().getStatusCode())
         );
-        HttpResponseSuccess httpResponseSuccess = httpResponse.asSuccess();
+        var httpResponseSuccess = httpResponse.asSuccess();
         assertAll(
           () -> assertNotNull(httpResponseSuccess),
           () -> assertEquals(200, httpResponseSuccess.getStatusCode()),
           () -> assertNotNull(httpResponseSuccess.getBody())
         );
         try {
-          AstronomicPicture astronomicPicture = (new ObjectMapper()).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(httpResponseSuccess.getBody(), AstronomicPicture.class);
+          final var astronomicPicture = (new ObjectMapper()).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(httpResponseSuccess.getBody(), AstronomicPicture.class);
           assertAll(
             () -> assertNotNull(astronomicPicture, "picture is null"),
             () -> assertNotNull(astronomicPicture.getDate(), "Date field is null"),
@@ -95,7 +95,7 @@ final class HttpRequestGetTest {
 
   @Test
   void getRequestWithResponseFailure() {
-    final String unknownHost = "api.nasa.gov-not-existing";
+    final var unknownHost = "api.nasa.gov-not-existing";
     StepVerifier
       .create(HttpRequest.from("https://" + unknownHost + "/planetary/apod").get())
       .assertNext(httpResponse -> {
@@ -105,13 +105,13 @@ final class HttpRequestGetTest {
           () -> assertNull(httpResponse.asSuccess()),
           () -> assertNotNull(httpResponse.asFailure())
         );
-        HttpResponseFailure httpResponseFailure = httpResponse.asFailure();
+        final var httpResponseFailure = httpResponse.asFailure();
         assertAll(
-          () -> assertNotNull(httpResponseFailure),
-          () -> assertNotNull(httpResponseFailure.getThrowable()),
-          () -> assertTrue(httpResponseFailure.getThrowable().getMessage().contains(String.format("failed to resolve '%s'", unknownHost))),
-          () -> assertNotNull(httpResponseFailure.getThrowable().getCause()),
-          () -> assertTrue(httpResponseFailure.getThrowable().getCause() instanceof UnknownHostException)
+          () -> assertNotNull(httpResponseFailure, "httpResponseFailure not null"),
+          () -> assertNotNull(httpResponseFailure.getThrowable(), "httpResponseFailure.getThrowable() not null"),
+          () -> assertTrue(httpResponseFailure.getThrowable().getMessage().startsWith(String.format("Failed to resolve '%s'", unknownHost)), "httpResponseFailure.getThrowable().getMessage().contains..."),
+          () -> assertNotNull(httpResponseFailure.getThrowable().getCause(), "httpResponseFailure.getThrowable().getCause() not null"),
+          () -> assertTrue(httpResponseFailure.getThrowable().getCause() instanceof UnknownHostException, "httpResponseFailure.getThrowable().getCause() instanceof UnknownHostException")
         );
       })
       .verifyComplete();

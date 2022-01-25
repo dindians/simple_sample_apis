@@ -51,7 +51,7 @@ class EitherTest {
 
     @Test
     void right() {
-        final Integer rightValue = 13;
+        final var rightValue = 13;
         final Either<Boolean,Integer> right = Either.right(rightValue);
         final Function<Boolean,String> foldLeft = value -> { throw new RuntimeException(); };
         final Function<Integer,String> foldRight = value -> value.toString();
@@ -66,9 +66,9 @@ class EitherTest {
 
         final Function<Integer, String> mapRightValue = value -> value.toString();
         final Function<Integer, Either<Boolean,String>> mapRightValueToEither = value -> Either.right(mapRightValue.apply(value));
-        final String mappedRightValue = mapRightValue.apply(rightValue);
-        final Either<Boolean, String> mappedRight = right.map(mapRightValue);
-        final Either<Boolean,String> flatMappedRight = right.flatMap(mapRightValueToEither);
+        final var mappedRightValue = mapRightValue.apply(rightValue);
+        final var mappedRight = right.map(mapRightValue);
+        final var flatMappedRight = right.flatMap(mapRightValueToEither);
 
         assertAll(
           () -> assertThrows(IllegalArgumentException.class, () -> right.map(null)),

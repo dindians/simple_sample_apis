@@ -1,0 +1,2 @@
+Configure a multi-module Maven project
+- https://www.jetbrains.com/help/idea/maven-support.html#maven_multi_module
