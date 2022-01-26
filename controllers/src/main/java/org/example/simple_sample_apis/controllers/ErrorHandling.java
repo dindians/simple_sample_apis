@@ -12,9 +12,9 @@ public class ErrorHandling {
     if(context != null) { errorText += String.format("\n(context: %s)", context); }
     Exception errorException = null;
     try {
-      var usecaseErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": %s } }", context, eitherError.getClass().getName(), new ObjectMapper().writeValueAsString(eitherError));
-      errorText += String.format("\n(error: %s)", usecaseErrorJson);
-      return usecaseErrorJson;
+      var eitherErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": { \"%s\": %s } } }", context, eitherError.getClass().getName(), eitherError.getClass().getSimpleName(), new ObjectMapper().writeValueAsString(eitherError));
+      errorText += String.format("\n(error: %s)", eitherErrorJson);
+      return eitherErrorJson;
     }
     catch(Exception exception) {
       errorException = exception;
