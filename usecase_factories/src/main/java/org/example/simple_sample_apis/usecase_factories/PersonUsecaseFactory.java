@@ -15,7 +15,7 @@ import java.util.function.Function;
 public final class PersonUsecaseFactory {
   public GetPersonUsecase getPersonUsecase() { return new GetPersonUsecase(this::getPerson); }
 
-  private Mono<Either<EitherError, Person>> getPerson(long personId) {
+  Mono<Either<EitherError, Person>> getPerson(long personId) {
     return getPersonFromMemory(personId).map(eitherErrorOrPersonFromMemory -> eitherErrorOrPersonFromMemory.flatMap(PersonUsecaseFactory::personFromMemoryToPerson));
   }
 

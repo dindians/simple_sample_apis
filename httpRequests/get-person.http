@@ -1,5 +1,5 @@
 ### Get Person
-GET {{host}}/api/persons/39
+GET {{host}}/api/persons/40
 Accept: application/json
 
 > {%

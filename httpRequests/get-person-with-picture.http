@@ -1,0 +1,2 @@
+### Get Person-with-picture
+GET {{host}}/api/persons-with-picture/40
