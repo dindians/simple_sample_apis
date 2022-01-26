@@ -6,9 +6,11 @@ import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import static org.example.simple_sample_apis.usecase_factories.Serializer.deserialize;
 
+@Component
 public final class AstronomicPictureUsecaseFactory {
   private final ConfigValues configValues;
 

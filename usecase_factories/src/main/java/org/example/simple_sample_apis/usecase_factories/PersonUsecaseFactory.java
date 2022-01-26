@@ -37,7 +37,8 @@ public final class PersonUsecaseFactory {
 
     final Function<Long, Boolean> isEven = x -> (x & 1) == 0;
 
-    if(isEven.apply(personFromMemory.getId())) { return Either.right(new Person(personFromMemory.getId())); }
-    return Either.left(new PersonMappingError(personFromMemory.getId(), String.format("an unexpected error occurred while mapping a person-from-memory to a person. Person-id: %d", personFromMemory.getId())));
+    return isEven.apply(personFromMemory.getId())?
+      Either.right(new Person(personFromMemory.getId())) :
+      Either.left(new PersonMappingError(personFromMemory.getId(), String.format("an unexpected error occurred while mapping a person-from-memory to a person. Person-id: %d", personFromMemory.getId())));
   }
 }
