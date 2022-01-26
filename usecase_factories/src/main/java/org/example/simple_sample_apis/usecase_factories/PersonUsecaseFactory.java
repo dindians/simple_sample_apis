@@ -7,12 +7,14 @@ import org.example.simple_sample_apis.services.PersonMemoryService;
 import org.example.simple_sample_apis.usecases.GetPersonUsecase;
 import org.example.simple_sample_apis.usecases.Person;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+@Component
 public final class PersonUsecaseFactory {
   public GetPersonUsecase getPersonUsecase() { return new GetPersonUsecase(this::getPerson); }
 
-  Mono<Either<EitherError, Person>> getPerson(long personId) {
+  private Mono<Either<EitherError, Person>> getPerson(long personId) {
     return getPersonFromMemory(personId).map(eitherErrorOrPersonFromMemory -> eitherErrorOrPersonFromMemory.map(PersonUsecaseFactory::personFromMemoryToPerson));
   }
 

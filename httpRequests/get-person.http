@@ -1,0 +1,18 @@
+### Get Person
+GET {{host}}/persons/39
+Accept: application/json
+
+> {%
+client.test("Response status is 200 OK", function() {
+  var expectedStatus = 200;
+  var actualStatus = response.status;
+
+  client.assert(expectedStatus === actualStatus, "Expected response status to be " + expectedStatus + ", actual response status is " + actualStatus);
+});
+
+client.test("Response content-type is application/json", function() {
+  var expectedType = "application/json";
+  var actualType = response.contentType.mimeType;
+  client.assert(actualType === expectedType, "Expected response content-type '" + expectedType + "' but received '" + actualType + "'");
+});
+%}

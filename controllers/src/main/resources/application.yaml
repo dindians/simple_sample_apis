@@ -1,0 +1,8 @@
+server:
+  port: ${server_port:8089}
+spring:
+  webflux:
+    base-path: ${spring_webflux_base-path:/api}
+astronomic_picture:
+  api:
+    get: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY  # find out how to rerun the spring boot annotation processor to resolve this property; see https://docs.spring.io/spring-boot/docs/2.5.2/reference/html/configuration-metadata.html#configuration-metadata.annotation-processor
