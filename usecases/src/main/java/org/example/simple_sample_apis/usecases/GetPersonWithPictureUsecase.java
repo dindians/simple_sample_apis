@@ -16,7 +16,7 @@ public final class GetPersonWithPictureUsecase {
     this.getAstronomicPicture = getAstronomicPicture;
   }
 
-  public Function<Long, Mono<Either<EitherError, PersonWithPicture>>> etPersonWithPicture() { return this::getPersonWithPicture; }
+  public Function<Long, Mono<Either<EitherError, PersonWithPicture>>> getPersonWithPicture() { return this::getPersonWithPicture; }
 
   private Mono<Either<EitherError, PersonWithPicture>> getPersonWithPicture(long personId) {
     return getPerson.apply(personId)

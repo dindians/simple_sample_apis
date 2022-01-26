@@ -28,7 +28,7 @@ public class GetPersonWithPictureUsecaseTest {
     final Function<Long, Mono<Either<EitherError, AstronomicPicture>>> getAstronomicPicture = pictureId -> Mono.just(Either.right(new AstronomicPicture()));
     final var personId = 13L;
     StepVerifier
-      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).etPersonWithPicture().apply(personId))
+      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).getPersonWithPicture().apply(personId))
       .assertNext(eitherErrorOrPersonWithPicture -> {
         assertAll(
           () -> assertNotNull(eitherErrorOrPersonWithPicture),
@@ -60,7 +60,7 @@ public class GetPersonWithPictureUsecaseTest {
     final Function<Long, Mono<Either<EitherError, AstronomicPicture>>> getAstronomicPicture = pictureId -> Mono.just(Either.right(new AstronomicPicture()));
     final var personId = 13L;
     StepVerifier
-      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).etPersonWithPicture().apply(personId))
+      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).getPersonWithPicture().apply(personId))
       .assertNext(eitherErrorOrPersonWithPicture -> {
         assertAll(
           () -> assertNotNull(eitherErrorOrPersonWithPicture),
@@ -93,7 +93,7 @@ public class GetPersonWithPictureUsecaseTest {
     final Function<Long, Mono<Either<EitherError, AstronomicPicture>>> getAstronomicPicture = pictureId -> Mono.just(Either.left(new GetAstronomicPictureError()));
     final var personId = 13L;
     StepVerifier
-      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).etPersonWithPicture().apply(personId))
+      .create(new GetPersonWithPictureUsecase(getPerson, getAstronomicPicture).getPersonWithPicture().apply(personId))
       .assertNext(eitherErrorOrPersonWithPicture -> {
         assertAll(
           () -> assertNotNull(eitherErrorOrPersonWithPicture),

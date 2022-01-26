@@ -25,7 +25,7 @@ public class PersonsWithPictureController {
 
   @GetMapping("/{personId}")
   public Mono<String> getPersonWithPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
-    return getPersonWithPictureUsecase.etPersonWithPicture().apply(personId)
+    return getPersonWithPictureUsecase.getPersonWithPicture().apply(personId)
       .map(eitherErrorOrPersonWithPicture ->
         eitherErrorOrPersonWithPicture
           .flatMap(Serializer::serialize)
