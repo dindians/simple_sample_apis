@@ -2,6 +2,7 @@ package org.example.simple_sample_apis.usecases;
 
 import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.fp.EitherError;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GetPersonWithPictureUsecaseTest {
   @Test
+  @Disabled
   void getPersonWithPictureUsecaseConstructor() {
     final Function<Long, Mono<Either<EitherError, Person>>> getPerson = id -> Mono.just(Either.right(new Person(id)));
     final Function<Long, Mono<Either<EitherError, AstronomicPicture>>> getAstronomicPicture = pictureId -> Mono.just(Either.right(new AstronomicPicture()));

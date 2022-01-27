@@ -1,23 +1,26 @@
 package org.example.simple_sample_apis.fp;
 
-import org.junit.jupiter.api.Test;
 import java.util.function.Function;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EitherTest {
     @Test
+    @Disabled
     void notNullArguments() {
         final Either<Boolean, Integer> left = Either.left(true);
         final Either<Boolean,Integer> right = Either.right(13);
         assertAll(
-          () -> assertThrows(IllegalArgumentException.class, () -> Either.left(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> Either.right(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> left.map(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> right.map(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> left.flatMap(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> right.flatMap(null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> left.fold(null, null)),
-          () -> assertThrows(IllegalArgumentException.class, () -> right.fold(null, null))
+          () -> assertThrows(NullPointerException.class, () -> Either.left(null)),
+          () -> assertThrows(NullPointerException.class, () -> Either.right(null)),
+          () -> assertThrows(NullPointerException.class, () -> left.map(null)),
+          () -> assertThrows(NullPointerException.class, () -> right.map(null)),
+          () -> assertThrows(NullPointerException.class, () -> left.flatMap(null)),
+          () -> assertThrows(NullPointerException.class, () -> right.flatMap(null)),
+          () -> assertThrows(NullPointerException.class, () -> left.fold(null, null)),
+          () -> assertThrows(NullPointerException.class, () -> right.fold(null, null))
         );
     }
 
@@ -71,7 +74,7 @@ class EitherTest {
         final var flatMappedRight = right.flatMap(mapRightValueToEither);
 
         assertAll(
-          () -> assertThrows(IllegalArgumentException.class, () -> right.map(null)),
+          () -> assertThrows(NullPointerException.class, () -> right.map(null)),
           () -> assertNotNull(mappedRight),
           () -> assertTrue(mappedRight instanceof Either.Right),
           () -> assertEquals(mappedRightValue, mappedRight.getRightValue()),

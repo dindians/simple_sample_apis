@@ -11,9 +11,7 @@
         <module>fp</module>
         <module>http_client</module>
         <module>usecases</module>
-        <module>usecase_factories</module>
         <module>services</module>
-        <module>controllers</module>
         <module>app</module>
     </modules>
 
