@@ -14,6 +14,7 @@
         <module>usecase_factories</module>
         <module>services</module>
         <module>controllers</module>
+        <module>app</module>
     </modules>
 
     <properties>
