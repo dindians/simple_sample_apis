@@ -34,6 +34,6 @@ public final class PersonsController {
     };
     return getPersonUsecase.getPerson()
       .apply(personId)
-      .map(eitherErrorPersonEither -> ControllerResponses.jsonResponse(eitherErrorPersonEither, errorResponse, okResponse));
+      .map(eitherErrorPerson -> ControllerResponses.jsonResponse(eitherErrorPerson, errorResponse, okResponse));
   }
 }
