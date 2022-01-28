@@ -6,7 +6,7 @@ import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SerializerTest {
+public class JsonSerializerTest {
   @Test
   void deserializeAstronomicPictureSucceeds() {
     final var date = "2022-01-21";
@@ -24,7 +24,7 @@ public class SerializerTest {
         "\",\"service_version\":\""+ serviceVersion +
         "\",\"title\":\""+ title +
         "\",\"url\":\""+ url + "\"}";
-    final var eitherAstronomicPicture = Serializer.deserialize(astronomicPictureJson, AstronomicPicture.class);
+    final var eitherAstronomicPicture = JsonSerializer.deserialize(astronomicPictureJson, AstronomicPicture.class);
     assertAll(
       () -> assertNotNull(eitherAstronomicPicture),
       () -> assertTrue(eitherAstronomicPicture instanceof Either.Right)
@@ -63,12 +63,12 @@ public class SerializerTest {
         "\",\"service_version\":\""+ serviceVersion +
         "\",\"title\":\""+ title +
         "\",\"url\":\""+ url + "\"}";
-    final var eitherAstronomicPicture = Serializer.deserialize(astronomicPictureJson, AstronomicPicture.class);
+    final var eitherAstronomicPicture = JsonSerializer.deserialize(astronomicPictureJson, AstronomicPicture.class);
     assertAll(
       () -> assertNotNull(eitherAstronomicPicture),
       () -> assertTrue(eitherAstronomicPicture instanceof Either.Right)
     );
-    final var eitherUsecaseError = Serializer.deserialize(astronomicPictureJson, AstronomicPicture.class, true);
+    final var eitherUsecaseError = JsonSerializer.deserialize(astronomicPictureJson, AstronomicPicture.class, true);
     assertAll(
       () -> assertNotNull(eitherUsecaseError),
       () -> assertTrue(eitherUsecaseError instanceof Either.Left)

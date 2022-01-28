@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.example.simple_sample_apis.usecases.GetPersonWithPictureUsecase;
 
 @Component
-public class PersonWithPictureUsecaseFactory {
+public final class PersonWithPictureUsecaseFactory {
   private final PersonUsecaseFactory personUsecaseFactory;
   private final AstronomicPictureUsecaseFactory astronomicPictureUsecaseFactory;
 
@@ -13,6 +13,7 @@ public class PersonWithPictureUsecaseFactory {
     this.personUsecaseFactory = personUsecaseFactory;
     this.astronomicPictureUsecaseFactory = astronomicPictureUsecaseFactory;
   }
+
   public GetPersonWithPictureUsecase getPersonWithPictureUsecase() {
     return new GetPersonWithPictureUsecase(personUsecaseFactory::getPerson, astronomicPictureUsecaseFactory::getAstronomicPicture);
   }

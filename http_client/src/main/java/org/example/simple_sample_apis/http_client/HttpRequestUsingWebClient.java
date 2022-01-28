@@ -1,17 +1,15 @@
 package org.example.simple_sample_apis.http_client;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
+@Component
 public final class HttpRequestUsingWebClient implements HttpRequest {
-  private final String uri;
-
-  HttpRequestUsingWebClient(@NotNull String uri) { this.uri = uri; }
-
   @Override
-  public Mono<HttpResponse> get() {
+  public Mono<HttpResponse> get(@NotNull String uri) {
     return WebClient
       .create()
       .get()
@@ -26,13 +24,13 @@ public final class HttpRequestUsingWebClient implements HttpRequest {
   }
 
   @Override
-  public Mono<HttpResponse> delete() { throw new HttpRequestMethodNotImplementedException(); }
+  public Mono<HttpResponse> delete(@NotNull String uri) { throw new HttpRequestMethodNotImplementedException(); }
   @Override
-  public Mono<HttpResponse> post(String json) { throw new HttpRequestMethodNotImplementedException(); }
+  public Mono<HttpResponse> post(@NotNull String uri, String json) { throw new HttpRequestMethodNotImplementedException(); }
   @Override
-  public Mono<HttpResponse> put(String json) { throw new HttpRequestMethodNotImplementedException(); }
+  public Mono<HttpResponse> put(@NotNull String uri, String json) { throw new HttpRequestMethodNotImplementedException(); }
   @Override
-  public Mono<HttpResponse> patch(String json) { throw new HttpRequestMethodNotImplementedException(); }
+  public Mono<HttpResponse> patch(@NotNull String uri, String json) { throw new HttpRequestMethodNotImplementedException(); }
 
   private final static class HttpRequestMethodNotImplementedException extends RuntimeException {}
 

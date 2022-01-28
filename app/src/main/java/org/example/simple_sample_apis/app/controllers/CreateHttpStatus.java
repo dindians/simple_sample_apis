@@ -5,11 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.app.usecase_factories.HasHttpStatusCode;
 
-public class HttpStatusFromEitherError {
-  static Integer httpStatusCodeFromEitherError(@NotNull EitherError eitherError) {
-    return (eitherError instanceof HasHttpStatusCode)? ((HasHttpStatusCode) eitherError).getHttpStatusCode() : HttpStatus.INTERNAL_SERVER_ERROR.value();
-  }
+final class CreateHttpStatus {
   static HttpStatus httpStatusFromEitherError(@NotNull EitherError eitherError) {
-    return HttpStatus.valueOf(httpStatusCodeFromEitherError(eitherError));
+    return (eitherError instanceof HasHttpStatusCode)? HttpStatus.valueOf(((HasHttpStatusCode) eitherError).getHttpStatusCode()) : HttpStatus.INTERNAL_SERVER_ERROR;
   }
 }

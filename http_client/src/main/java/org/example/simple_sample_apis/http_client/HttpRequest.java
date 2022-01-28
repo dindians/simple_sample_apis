@@ -4,10 +4,9 @@ import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 
 public interface HttpRequest {
-  static HttpRequest from(@NotNull String uri) { return new HttpRequestUsingWebClient(uri); }
-  Mono<HttpResponse> get();
-  Mono<HttpResponse> delete();
-  Mono<HttpResponse> post(String json);
-  Mono<HttpResponse> put(String json);
-  Mono<HttpResponse> patch(String json);
+  Mono<HttpResponse> get(@NotNull String uri);
+  Mono<HttpResponse> delete(@NotNull String uri);
+  Mono<HttpResponse> post(@NotNull String uri, String json);
+  Mono<HttpResponse> put(@NotNull String uri, String json);
+  Mono<HttpResponse> patch(@NotNull String uri, String json);
 }

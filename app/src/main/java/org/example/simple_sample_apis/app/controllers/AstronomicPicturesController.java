@@ -1,5 +1,6 @@
 package org.example.simple_sample_apis.app.controllers;
 
+import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpStatus;
@@ -9,14 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.app.usecase_factories.AstronomicPictureUsecaseFactory;
-import org.example.simple_sample_apis.app.usecase_factories.Serializer;
 import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
-import static org.example.simple_sample_apis.app.controllers.HttpStatusFromEitherError.httpStatusFromEitherError;
+import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
 
 @RestController
 @RequestMapping(value = "/astronomic-pictures", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AstronomicPicturesController {
+public final class AstronomicPicturesController {
   private final GetAstronomicPictureUsecase getAstronomicPictureUsecase;
 
   public AstronomicPicturesController(@NotNull AstronomicPictureUsecaseFactory astronomicPictureUsecaseFactory) {
@@ -25,20 +26,16 @@ public class AstronomicPicturesController {
 
   @GetMapping("/{id}")
   public Mono<String> getAstronomicPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long id) {
-    return getAstronomicPictureUsecase.getAstronomicPicture().apply(id)
-      .map(eitherErrorOrAstronomicPicture ->
-        eitherErrorOrAstronomicPicture
-          .flatMap(Serializer::serialize)
-          .fold(
-            eitherError -> {
-              serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-              return ErrorHandling.error(eitherError, String.format("rest-controller-class: %s; path: /astronomic-pictures/%d", AstronomicPicturesController.class.getName(), id), AstronomicPicturesController.class);
-            },
-            astronomicPictureJson -> {
-              serverHttpResponse.setStatusCode(HttpStatus.OK);
-              return astronomicPictureJson;
-            }
-          )
-      );
+    Function<EitherError, String> errorResponse = eitherError -> {
+      serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
+      return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; path: /persons/%d", PersonsController.class.getName(), id), AstronomicPicturesController.class);
+    };
+    Function<String, String> okResponse = json -> {
+      serverHttpResponse.setStatusCode(HttpStatus.OK);
+      return json;
+    };
+    return getAstronomicPictureUsecase.getAstronomicPicture()
+      .apply(id)
+      .map(eitherErrorOrAstronomicPicture -> ControllerResponses.jsonResponse(eitherErrorOrAstronomicPicture, errorResponse, okResponse));
   }
 }

@@ -26,7 +26,7 @@ final class HttpRequestGetTest {
   @Test
   void getRequestWithResponseOk() {
     StepVerifier
-      .create(HttpRequest.from("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY").get())
+      .create(new HttpRequestUsingWebClient().get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"))
       .assertNext(httpResponse -> {
         assertAll(
           () -> assertNotNull(httpResponse),
@@ -64,7 +64,7 @@ final class HttpRequestGetTest {
   @Test
   void getRequestWithResponseNotFound() {
     StepVerifier
-      .create(HttpRequest.from("https://api.nasa.gov/planetary/apod-not-existing?api_key=DEMO_KEY").get())
+      .create(new HttpRequestUsingWebClient().get("https://api.nasa.gov/planetary/apod-not-found?api_key=DEMO_KEY"))
       .assertNext(httpResponse -> assertAll(
         () -> assertNotNull(httpResponse),
         () -> assertTrue(httpResponse.isSuccess()),
@@ -80,7 +80,7 @@ final class HttpRequestGetTest {
   @Test
   void getRequestWithResponseForbidden() {
     StepVerifier
-      .create(HttpRequest.from("https://api.nasa.gov/planetary/apod").get())
+      .create(new HttpRequestUsingWebClient().get("https://api.nasa.gov/planetary/apod"))
       .assertNext(httpResponse -> assertAll(
         () -> assertNotNull(httpResponse),
         () -> assertTrue(httpResponse.isSuccess()),
@@ -97,7 +97,7 @@ final class HttpRequestGetTest {
   void getRequestWithResponseFailure() {
     final var unknownHost = "api.nasa.gov-not-existing";
     StepVerifier
-      .create(HttpRequest.from("https://" + unknownHost + "/planetary/apod").get())
+      .create(new HttpRequestUsingWebClient().get("https://" + unknownHost + "/planetary/apod"))
       .assertNext(httpResponse -> {
         assertAll(
           () -> assertNotNull(httpResponse),

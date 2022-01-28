@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.simple_sample_apis.fp.EitherError;
 
-public class ErrorHandling {
-  static <T> String error(@NotNull EitherError eitherError, String context, @NotNull Class<T> clazz) {
+final class EitherErrorToJson {
+  static <T> String execute(@NotNull EitherError eitherError, String context, @NotNull Class<T> clazz) {
     String errorText = eitherError.toString();
     if(context != null) { errorText += String.format("\n(context: %s)", context); }
     Exception errorException = null;

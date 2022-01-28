@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.http_client.HttpResponseFailure;
 
-public final class HttpResponseError implements EitherError {
+final class HttpResponseError implements EitherError {
   private final String uri;
   private final HttpResponseFailure httpResponseFailure;
 
@@ -13,6 +13,6 @@ public final class HttpResponseError implements EitherError {
     this.httpResponseFailure = httpResponseFailure;
   }
 
-  public String getUri() { return uri; }
-  public HttpResponseFailure getHttpResponseFailure() { return httpResponseFailure; }
+  String getUri() { return uri; }
+  HttpResponseFailure getHttpResponseFailure() { return httpResponseFailure; }
 }
