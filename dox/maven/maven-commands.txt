@@ -1,0 +1,28 @@
+.\mvnw -v
+.\mvnw clean
+.\mvnw clean -pl fp
+.\mvnw compile
+.\mvnw compile -pl fp -am
+.\mvnw test -pl fp -am
+.\mvnw test
+.\mvnw test -pl fp -am
+=> \fp\\target\surefire-reports\*
+.\mvnw test -pl fp -am
+.\mvnw test -Dtest=org.example.simple_sample_apis.app.usecase_factories.HttpResponseMethodsTest -DfailIfNoTests=false -pl app -am
+.\mvnw test -Dtest=org.example.simple_sample_apis.app.usecase_factories.HttpResponseMethodsTest#getBodyForHttpResponseFailure -DfailIfNoTests=false -pl app -am
+
+### http://maven.apache.org/surefire/maven-surefire-report-plugin/index.html
+.\mvnw test -pl ktorHttpClient -am install surefire-report:report
+.\mvnw surefire-report:report
+=> Surefire Test report files in file:///C:/Users/AntondeCraen/Bitbucket/repositories/community_salesforce_apis/<module>/target/site/surefire-report.html
+.\mvnw clean install surefire-report:report
+
+.\mvnw -rf :app
+.\mvnw run => [ERROR] Unknown lifecycle phase "run"
+.\mvnw package (=> creates runnable jar apisHost-runnable-community-salesforce-apis-<version>.jar in apisHost\target\ and config files in apisHost\target\classes\)
+
+refresh dependencies:
+https://medium.com/@TechExpertise/force-maven-to-fetch-dependencies-from-remote-f8d44b80a37d
+.\mvnw clean install -U -X
+
+.\mvnw dependency:purge-local-repository
