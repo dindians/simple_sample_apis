@@ -4,6 +4,7 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import org.example.simple_sample_apis.usecases.GetPersonUsecase;
 import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
 
 @RestController
-@RequestMapping("/persons")
+@RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
 public final class PersonsController {
   private final GetPersonUsecase getPersonUsecase;
 

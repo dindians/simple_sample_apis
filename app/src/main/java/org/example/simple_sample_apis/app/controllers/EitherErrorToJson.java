@@ -12,7 +12,7 @@ final class EitherErrorToJson {
     if(context != null) { errorText += String.format("\n(context: %s)", context); }
     Exception errorException = null;
     try {
-      var eitherErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": { \"%s\": %s } } }", context, eitherError.getClass().getName(), eitherError.getClass().getSimpleName(), new ObjectMapper().writeValueAsString(eitherError));
+      var eitherErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": { \"%s\": %s } } }", context, eitherError.getClass().getName(), lowercaseFirstCharacter(eitherError.getClass().getSimpleName()), new ObjectMapper().writeValueAsString(eitherError));
       errorText += String.format("\n(error: %s)", eitherErrorJson);
       return eitherErrorJson;
     }
@@ -29,5 +29,9 @@ final class EitherErrorToJson {
       }
     }
     return "{ \"error\": \"" + errorText + "\"}";
+  }
+
+  private static String lowercaseFirstCharacter(@NotNull String value) {
+    return value.substring(0,1).toLowerCase() + value.substring(1);
   }
 }
