@@ -1,0 +1,2 @@
+Spring Boot Maven Plugin
+- https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/html/build-tool-plugins-maven-plugin.html
