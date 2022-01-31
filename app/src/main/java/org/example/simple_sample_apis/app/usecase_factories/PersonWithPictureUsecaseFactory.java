@@ -15,6 +15,6 @@ public final class PersonWithPictureUsecaseFactory {
   }
 
   public GetPersonWithPictureUsecase getPersonWithPictureUsecase() {
-    return new GetPersonWithPictureUsecase(personUsecaseFactory::getPerson, astronomicPictureUsecaseFactory::getAstronomicPicture);
+    return new GetPersonWithPictureUsecase(personUsecaseFactory.getPersonUsecase().getPerson(), astronomicPictureUsecaseFactory.getAstronomicPictureUsecase().getAstronomicPicture());
   }
 }
