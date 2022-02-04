@@ -12,6 +12,7 @@ import org.example.simple_sample_apis.usecases.Person;
 
 @Component
 public final class PersonUsecaseFactoryImpl implements PersonUsecaseFactory {
+  @Override
   public GetPersonUsecase getPersonUsecase() { return new GetPersonUsecase(this::getPerson); }
 
   private Mono<Either<EitherError, Person>> getPerson(long personId) {

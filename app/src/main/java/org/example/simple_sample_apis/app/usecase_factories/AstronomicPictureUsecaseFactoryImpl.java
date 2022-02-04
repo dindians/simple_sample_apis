@@ -19,6 +19,7 @@ public final class AstronomicPictureUsecaseFactoryImpl implements AstronomicPict
     this.httpRequest = httpRequest;
   }
 
+  @Override
   public GetAstronomicPictureUsecase getAstronomicPictureUsecase() { return new GetAstronomicPictureUsecase(this::getAstronomicPicture); }
 
   private Mono<Either<EitherError, AstronomicPicture>> getAstronomicPicture(long dummyId) {
