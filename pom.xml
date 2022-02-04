@@ -29,8 +29,8 @@
 
     <properties>
         <org.jetbrains.annotations.version>22.0.0</org.jetbrains.annotations.version><!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
-        <org.springframework.boot.version>2.6.2</org.springframework.boot.version><!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-        <io.projectreactor.reactor-core.version>3.4.7</io.projectreactor.reactor-core.version><!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
+        <org.springframework.boot.version>2.6.3</org.springframework.boot.version><!-- https://mvnrepository.com/artifact/org.springframework.boot/ -->
+        <io.projectreactor.reactor-core.version>3.4.14</io.projectreactor.reactor-core.version><!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
         <com.fasterxml.jackson.core.databind.version>2.13.1</com.fasterxml.jackson.core.databind.version><!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <org.junit.jupiter.version>5.8.2</org.junit.jupiter.version><!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
         <io.projectreactor.reactor-test.version>3.4.14</io.projectreactor.reactor-test.version><!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-test -->
