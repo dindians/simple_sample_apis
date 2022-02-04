@@ -88,4 +88,3 @@ bin/
 
 # http requests
 *.private.env.json
-/.idea/
