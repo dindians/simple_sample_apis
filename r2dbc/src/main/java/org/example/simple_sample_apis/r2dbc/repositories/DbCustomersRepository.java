@@ -3,7 +3,6 @@ package org.example.simple_sample_apis.r2dbc.repositories;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.example.simple_sample_apis.r2dbc.models.DbCustomer;
 import org.example.simple_sample_apis.r2dbc.models.DbCustomerImpl;
@@ -13,8 +12,11 @@ wrapper class around the interface DbCustomersR2dbcRepository to abstract away t
  */
 @Component
 public class DbCustomersRepository {
-  @Autowired
-  private DbCustomersR2dbcRepository dbCustomersR2dbcRepository;
+  private final DbCustomersR2dbcRepository dbCustomersR2dbcRepository;
+
+  public DbCustomersRepository(DbCustomersR2dbcRepository dbCustomersR2dbcRepository) {
+    this.dbCustomersR2dbcRepository = dbCustomersR2dbcRepository;
+  }
 
   public Mono<DbCustomer> getDbCustomerById(Integer customerId) {
     // todo remove the creation and save of a new DbCustomerImpl.
