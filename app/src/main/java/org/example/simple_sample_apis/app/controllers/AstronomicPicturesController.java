@@ -28,7 +28,7 @@ public final class AstronomicPicturesController {
   public Mono<String> getAstronomicPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long id) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; path: /persons/%d", PersonsController.class.getName(), id), AstronomicPicturesController.class);
+      return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; method: GET; path: /astronomic-pictures/%d", PersonsController.class.getName(), id), AstronomicPicturesController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);

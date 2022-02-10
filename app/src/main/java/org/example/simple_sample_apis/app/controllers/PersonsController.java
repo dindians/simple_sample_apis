@@ -26,7 +26,7 @@ public final class PersonsController {
   public Mono<String> getPerson(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; path: /persons/%d", PersonsController.class.getName(), personId), PersonsController.class);
+      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons/%d", PersonsController.class.getName(), personId), PersonsController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);

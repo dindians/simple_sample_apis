@@ -29,9 +29,7 @@ public class DbCustomersRepository {
   }
 
   public Mono<DbCustomer> getDbCustomerById(Integer customerId) {
-    // todo remove the creation and save of a new DbCustomerImpl.
-    return dbCustomersR2dbcRepository.save(new DbCustomerImpl(null, String.format("a-brand-new-customer[%d]", customerId), 1000 + customerId)).flatMap(savedDbCustomerImpl -> dbCustomersR2dbcRepository.findById(customerId));
- //   return dbCustomersR2dbcRepository.findById(customerId).map(this::dbCustomerImplToDbCustomer);
+    return dbCustomersR2dbcRepository.findById(customerId).map(this::dbCustomerImplToDbCustomer);
   }
 
   public Flux<DbCustomer> getDbCustomersByAge(Integer age) { return dbCustomersR2dbcRepository.findByAge(age).map(this::dbCustomerImplToDbCustomer); }

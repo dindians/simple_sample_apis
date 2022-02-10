@@ -4,7 +4,7 @@ import java.util.function.Function;
 import reactor.core.publisher.Mono;
 import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.fp.NotFoundError;
+import org.example.simple_sample_apis.fp.EntityNotFound;
 
 public final class PersonMemoryService {
   public Mono<Either<EitherError, PersonFromMemory>>  getPerson(long personId) {
@@ -21,7 +21,7 @@ public final class PersonMemoryService {
       public String getErrorText() { return errorText; }
     }
 
-    final class PersonFromMemoryNotFound implements NotFoundError {
+    final class PersonFromMemoryNotFound implements EntityNotFound {
       private final Long personId;
 
       PersonFromMemoryNotFound(Long personId) {

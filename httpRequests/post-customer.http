@@ -1,0 +1,9 @@
+### Post Customer
+POST {{host}}/api/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "barbara",
+  "age": 45
+}

@@ -1,6 +1,6 @@
 package org.example.simple_sample_apis.usecases;
 
-public class Customer {
+public class Customer{
   private final Integer id;
   private final String name;
   private final Integer age;
