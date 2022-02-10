@@ -3,16 +3,16 @@ package org.example.simple_sample_apis.app.controllers;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import static org.junit.jupiter.api.Assertions.*;
 
 @AutoConfigureWebTestClient
 @SpringBootTest(properties = "spring.main.web-application-type=reactive", webEnvironment = WebEnvironment.RANDOM_PORT)
-public class PersonsControllersTest {
+public final class PersonsControllersTest {
   static class MyPerson {
     private long id;
     public long getId() {
@@ -52,8 +52,8 @@ public class PersonsControllersTest {
 
   @Test
   void getPersonOk() {
-    final var personId = 14;
-    this.webClient.get().uri("/persons/" + personId)
+    final var personId = 14L;
+    webClient.get().uri("/persons/" + personId)
       .exchange()
       .expectStatus().isOk()
       .expectBody(String.class).value(personJson -> {

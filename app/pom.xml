@@ -5,6 +5,7 @@
     <parent>
         <artifactId>simple_sample_apis</artifactId>
         <groupId>org.example</groupId>
+        <!-- todo use version from parent -(same goes for sibling modules) -->
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -26,6 +27,11 @@
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>http_client</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>r2dbc</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -58,9 +64,27 @@
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
-            <version>${io.projectreactor.reactor-test.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- this tells Maven to build an executable jar for the project. Use this only for the app project?
+    https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/html/build-tool-plugins-maven-plugin.html
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+   -->
 
 </project>

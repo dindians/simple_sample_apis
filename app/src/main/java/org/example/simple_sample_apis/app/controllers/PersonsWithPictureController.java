@@ -26,16 +26,16 @@ public final class PersonsWithPictureController {
 
   @GetMapping("/{personId}")
   public Mono<String> getPersonWithPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
-    Function<EitherError, String> errorResponse = eitherError -> {
+    Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
       return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; path: /persons-with-picture/%d", PersonsWithPictureController.class.getName(), personId), PersonsWithPictureController.class);
     };
-    Function<String, String> okResponse = json -> {
+    Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);
       return json;
     };
     return getPersonWithPictureUsecase.getPersonWithPicture()
       .apply(personId)
-      .map(eitherErrorOrPersonWithPicture -> ControllerResponses.jsonResponse(eitherErrorOrPersonWithPicture, errorResponse, okResponse));
+      .map(eitherErrorOrPersonWithPicture -> ControllerResponses.jsonResponse(eitherErrorOrPersonWithPicture, failureResponse, successResponse));
   }
 }

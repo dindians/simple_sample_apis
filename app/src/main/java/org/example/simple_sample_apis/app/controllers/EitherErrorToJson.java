@@ -3,6 +3,7 @@ package org.example.simple_sample_apis.app.controllers;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.simple_sample_apis.fp.EitherError;
 
@@ -12,7 +13,7 @@ final class EitherErrorToJson {
     if(context != null) { errorText += String.format("\n(context: %s)", context); }
     Exception errorException = null;
     try {
-      var eitherErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": { \"%s\": %s } } }", context, eitherError.getClass().getName(), lowercaseFirstCharacter(eitherError.getClass().getSimpleName()), new ObjectMapper().writeValueAsString(eitherError));
+      var eitherErrorJson = String.format("{\"error\": { \"context\": \"%s\", \"type\": \"%s\", \"cause\": { \"%s\": %s } } }", context, eitherError.getClass().getName(), lowercaseFirstCharacter(eitherError.getClass().getSimpleName()), new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(eitherError));
       errorText += String.format("\n(error: %s)", eitherErrorJson);
       return eitherErrorJson;
     }

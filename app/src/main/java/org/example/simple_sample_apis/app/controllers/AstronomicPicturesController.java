@@ -26,16 +26,16 @@ public final class AstronomicPicturesController {
 
   @GetMapping("/{id}")
   public Mono<String> getAstronomicPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long id) {
-    Function<EitherError, String> errorResponse = eitherError -> {
+    Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
       return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; path: /persons/%d", PersonsController.class.getName(), id), AstronomicPicturesController.class);
     };
-    Function<String, String> okResponse = json -> {
+    Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);
       return json;
     };
     return getAstronomicPictureUsecase.getAstronomicPicture()
       .apply(id)
-      .map(eitherErrorOrAstronomicPicture -> ControllerResponses.jsonResponse(eitherErrorOrAstronomicPicture, errorResponse, okResponse));
+      .map(eitherErrorOrAstronomicPicture -> ControllerResponses.jsonResponse(eitherErrorOrAstronomicPicture, failureResponse, successResponse));
   }
 }

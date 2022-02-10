@@ -22,7 +22,7 @@ public final class PersonUsecaseFactoryImpl implements PersonUsecaseFactory {
   private Mono<Either<EitherError, PersonFromMemory>> getPersonFromMemory(long personId) { return new PersonMemoryService().getPerson(personId); }
 
   private static Either<EitherError,Person> personFromMemoryToPerson(@NotNull PersonFromMemory personFromMemory) {
-    class PersonMappingError implements EitherError {
+    final class PersonMappingError implements EitherError {
       private final Long personId;
       private final String errorText;
 
@@ -35,10 +35,10 @@ public final class PersonUsecaseFactoryImpl implements PersonUsecaseFactory {
       public String getErrorText() { return errorText; }
     }
 
-    final Function<Long, Boolean> isEven = x -> (x & 1) == 0;
+    final Function<Long, Boolean> isSevenFold = x -> (x % 7) == 0;
 
-    return isEven.apply(personFromMemory.getId())?
+    return !isSevenFold.apply(personFromMemory.getId())?
       Either.right(new Person(personFromMemory.getId())) :
-      Either.left(new PersonMappingError(personFromMemory.getId(), String.format("an unexpected error occurred while mapping a person-from-memory to a person. Person-id: %d", personFromMemory.getId())));
+      Either.left(new PersonMappingError(personFromMemory.getId(), String.format("an error occurs if you map a person-from-memory to a person when the person-id is seven-fold. Person-id: %d", personFromMemory.getId())));
   }
 }

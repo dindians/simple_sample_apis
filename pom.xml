@@ -25,16 +25,20 @@
         <module>usecases</module>
         <module>services</module>
         <module>app</module>
+        <module>r2dbc</module>
     </modules>
 
     <properties>
+        <revision>0.0.1</revision>
         <org.jetbrains.annotations.version>22.0.0</org.jetbrains.annotations.version><!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
         <org.springframework.boot.version>2.6.3</org.springframework.boot.version><!-- https://mvnrepository.com/artifact/org.springframework.boot/ -->
         <io.projectreactor.reactor-core.version>3.4.14</io.projectreactor.reactor-core.version><!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
         <com.fasterxml.jackson.core.databind.version>2.13.1</com.fasterxml.jackson.core.databind.version><!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <org.junit.jupiter.version>5.8.2</org.junit.jupiter.version><!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+        <org.springframework.data.version>2021.1.1</org.springframework.data.version><!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-bom -->
+        <org.junit.version>5.8.2</org.junit.version><!-- https://mvnrepository.com/artifact/org.junit/junit-bom -->
         <io.projectreactor.reactor-test.version>3.4.14</io.projectreactor.reactor-test.version><!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-test -->
-        <revision>0.0.1</revision>
+        <io.r2dbc.version>0.9.1.RELEASE</io.r2dbc.version><!-- https://mvnrepository.com/artifact/io.r2dbc -->
+        <com.h2database.h2-version>2.1.210</com.h2database.h2-version><!-- https://mvnrepository.com/artifact/com.h2database -->
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version><!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -42,6 +46,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-bom</artifactId>
+                <version>${org.springframework.data.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>

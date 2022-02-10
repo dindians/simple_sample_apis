@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>simple_sample_apis</artifactId>
+        <groupId>org.example</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>r2dbc</artifactId>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${org.jetbrains.annotations.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-r2dbc</artifactId><!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc -->
+        </dependency>
+        <dependency>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-h2</artifactId><!-- https://mvnrepository.com/artifact/io.r2dbc/r2dbc-h2 -->
+<!--
+    default io.r2dbc.r2dbc-h2 version is 0.8.4.RELEASE
+    not specifying the io.r2dbc.r2dbc-h2 version exactly results in the following runtime error:
+    java.lang.NoSuchMethodError: org.h2.engine.ConnectionInfo.<init>(Ljava/lang/String;Ljava/util/Properties;)V
+ 	at io.r2dbc.h2.H2ConnectionFactory.getConnectionInfo(H2ConnectionFactory.java:154)
+...
+ 	at reactor.test.DefaultStepVerifierBuilder$DefaultStepVerifier.toVerifierAndSubscribe(DefaultStepVerifierBuilder.java:867)
+	at reactor.test.DefaultStepVerifierBuilder$DefaultStepVerifier.verify(DefaultStepVerifierBuilder.java:823)
+	at reactor.test.DefaultStepVerifierBuilder$DefaultStepVerifier.verify(DefaultStepVerifierBuilder.java:815)
+	at org.example.simple_sample_apis.r2dbc.DbPlayersR2dbcRepositoryTest.lambda$setup$0(R2dbcApplicationIntegrationTest.java:52)
+-->
+            <version>${io.r2dbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-spi</artifactId><!-- https://mvnrepository.com/artifact/io.r2dbc/r2dbc-spi -->
+            <version>${io.r2dbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId><!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+            <version>${com.h2database.h2-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId><!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

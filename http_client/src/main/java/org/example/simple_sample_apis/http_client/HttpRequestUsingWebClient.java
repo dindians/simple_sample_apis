@@ -20,7 +20,7 @@ public final class HttpRequestUsingWebClient implements HttpRequest {
           .bodyToMono(String.class)
           .map(body -> WebClientResponse.responseSuccess(clientResponse.rawStatusCode(), body, uri)))
       .onErrorResume(throwable ->
-        Mono.just((WebClientError.responseFailure(throwable, uri))));
+        Mono.just(WebClientError.responseFailure(throwable, uri)));
   }
 
   @Override

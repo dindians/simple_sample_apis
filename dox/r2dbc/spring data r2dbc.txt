@@ -1,0 +1,17 @@
+Reactive Relational Database Connectivity (R2DBC) project brings reactive programming APIs to relational databases.
+- https://r2dbc.io/
+
+R2DBC is an open specification and establishes a Service Provider Interface (SPI) for driver vendors to implement and clients to consume.
+- https://github.com/r2dbc/r2dbc-spi/
+
+Spring Data R2DBC Reference Documentation
+- https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/
+
+Reactive programming with Spring Data R2DBC
+- https://medium.com/pictet-technologies-blog/reactive-programming-with-spring-data-r2dbc-ee9f1c24848b
+
+Spring Data R2DBC CRUD Example
+- https://www.vinsguru.com/spring-data-r2dbc/
+
+Using R2DBC with a Reactor Application
+- https://www.javacodegeeks.com/2021/09/using-r2dbc-with-a-reactor-application.html
