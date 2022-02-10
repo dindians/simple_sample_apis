@@ -1,5 +1,7 @@
 package org.example.simple_sample_apis.r2dbc.repositories;
 
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,6 +20,14 @@ public class DbCustomersRepository {
     this.dbCustomersR2dbcRepository = dbCustomersR2dbcRepository;
   }
 
+  public Mono<DbCustomer> saveDbCustomer(@NotNull DbCustomer dbCustomer) {
+    return dbCustomersR2dbcRepository.save(dbCustomerToDbCustomerImpl(dbCustomer)).map(this::dbCustomerImplToDbCustomer);
+  }
+
+  public Flux<DbCustomer> saveDbCustomers(@NotNull Iterable<DbCustomer> dbCustomers) {
+    return dbCustomersR2dbcRepository.saveAll(StreamSupport.stream(dbCustomers.spliterator(), false).map(this::dbCustomerToDbCustomerImpl).collect(Collectors.toList())).map(this::dbCustomerImplToDbCustomer);
+  }
+
   public Mono<DbCustomer> getDbCustomerById(Integer customerId) {
     // todo remove the creation and save of a new DbCustomerImpl.
     return dbCustomersR2dbcRepository.save(new DbCustomerImpl(null, String.format("a-brand-new-customer[%d]", customerId), 1000 + customerId)).flatMap(savedDbCustomerImpl -> dbCustomersR2dbcRepository.findById(customerId));
@@ -26,5 +36,6 @@ public class DbCustomersRepository {
 
   public Flux<DbCustomer> getDbCustomersByAge(Integer age) { return dbCustomersR2dbcRepository.findByAge(age).map(this::dbCustomerImplToDbCustomer); }
 
+  private DbCustomerImpl dbCustomerToDbCustomerImpl(@NotNull DbCustomer dbCustomer) { return new DbCustomerImpl(dbCustomer.getId(), dbCustomer.getName(), dbCustomer.getAge()); }
   private DbCustomer dbCustomerImplToDbCustomer(@NotNull DbCustomerImpl dbCustomerImpl) { return dbCustomerImpl; }
 }

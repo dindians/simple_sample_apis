@@ -10,6 +10,9 @@ Spring Data R2DBC Reference Documentation
 Reactive programming with Spring Data R2DBC
 - https://medium.com/pictet-technologies-blog/reactive-programming-with-spring-data-r2dbc-ee9f1c24848b
 
+Accessing data with R2DBC
+- https://spring.io/guides/gs/accessing-data-r2dbc/
+
 Spring Data R2DBC CRUD Example
 - https://www.vinsguru.com/spring-data-r2dbc/
 

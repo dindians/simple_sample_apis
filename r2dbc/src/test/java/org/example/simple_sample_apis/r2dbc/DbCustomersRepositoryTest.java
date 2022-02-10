@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.example.simple_sample_apis.r2dbc.models.DbCustomerImpl;
 import org.example.simple_sample_apis.r2dbc.repositories.DbCustomersR2dbcRepository;
 import org.example.simple_sample_apis.r2dbc.repositories.DbCustomersRepository;
+import org.example.simple_sample_apis.r2dbc.models.DbCustomer;
 
 @SpringBootTest
 public class DbCustomersRepositoryTest {
@@ -41,18 +42,18 @@ public class DbCustomersRepositoryTest {
   void createSaveAndGetDbCustomerById() {
     final var customerName = "test-createSaveAndGetDbCustomerById";
     final var customerAge = 954;
-    dbCustomersR2dbcRepository
-      .save(new DbCustomerImpl(null, customerName, customerAge))
-      .map(savedCustomer -> {
+    dbCustomersRepository
+      .saveDbCustomer(new DbCustomerImpl(null, customerName, customerAge))
+      .map(savedDbCustomer -> {
         assertAll(
-          () -> assertNotNull(savedCustomer),
-          () -> assertNotNull(savedCustomer.getId()),
-          () -> assertEquals(customerName, savedCustomer.getName()),
-          () -> assertEquals(customerAge, savedCustomer.getAge())
+          () -> assertNotNull(savedDbCustomer),
+          () -> assertNotNull(savedDbCustomer.getId()),
+          () -> assertEquals(customerName, savedDbCustomer.getName()),
+          () -> assertEquals(customerAge, savedDbCustomer.getAge())
         );
-        return savedCustomer;
+        return savedDbCustomer;
       })
-      .flatMap(savedCustomer -> dbCustomersRepository.getDbCustomerById(savedCustomer.getId()))
+      .flatMap(savedDbCustomer -> dbCustomersRepository.getDbCustomerById(savedDbCustomer.getId()))
       .as(StepVerifier::create)
       .assertNext(dbCustomer ->
         assertAll(
@@ -70,8 +71,8 @@ public class DbCustomersRepositoryTest {
   void createSaveGetAndDeleteDbCustomerById() {
     final var customerName = "test-createSaveGetAndDeleteDbCustomerById";
     final var customerAge = 4711;
-    dbCustomersR2dbcRepository
-      .save(new DbCustomerImpl(null, customerName, customerAge))
+    dbCustomersRepository
+      .saveDbCustomer(new DbCustomerImpl(null, customerName, customerAge))
       .map(savedCustomer -> {
         assertAll(
           () -> assertNotNull(savedCustomer),
@@ -102,11 +103,11 @@ public class DbCustomersRepositoryTest {
     final var customerName = "test-createSaveAndGetDbCustomersByAge";
     final var customerName2 = "createSaveAndGetDbCustomersByAge-other";
     final var customerAge = 42;
-    final var dbCustomersToSave = new ArrayList<DbCustomerImpl>();
+    final var dbCustomersToSave = new ArrayList<DbCustomer>();
     dbCustomersToSave.add(new DbCustomerImpl(null, customerName, customerAge));
     dbCustomersToSave.add(new DbCustomerImpl(null, customerName2, customerAge));
-    dbCustomersR2dbcRepository
-      .saveAll(dbCustomersToSave)
+    dbCustomersRepository
+      .saveDbCustomers(dbCustomersToSave)
       .map(savedCustomer -> {
         assertAll(
           () -> assertNotNull(savedCustomer),
