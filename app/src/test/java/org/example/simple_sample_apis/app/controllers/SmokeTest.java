@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(properties = "spring.main.web-application-type=reactive")
 class SmokeTest {
   @Autowired
-  private PersonsController personController;
+  private GetPersonsController personController;
   @Autowired
-  private AstronomicPicturesController astronomicPicturesController;
+  private GetAstronomicPicturesController getAstronomicPicturesController;
   @Autowired
-  private PersonsWithPictureController personsWithPictureController;
+  private GetPersonsWithPictureController getPersonsWithPictureController;
 
   @Test
   void loadAllControllers() {
     assertAll(
       () -> assertNotNull(this.personController),
-      () -> assertNotNull(this.astronomicPicturesController),
-      () -> assertNotNull(this.personsWithPictureController)
+      () -> assertNotNull(this.getAstronomicPicturesController),
+      () -> assertNotNull(this.getPersonsWithPictureController)
     );
   }
 }

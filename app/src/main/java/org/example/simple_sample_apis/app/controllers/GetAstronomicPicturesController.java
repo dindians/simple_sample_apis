@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.app.usecase_factories.AstronomicPictureUsecaseFactory;
+import org.example.simple_sample_apis.app.usecase_factories.GetAstronomicPictureUsecaseFactory;
 import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
 import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
 
 @RestController
 @RequestMapping(value = "/astronomic-pictures", produces = MediaType.APPLICATION_JSON_VALUE)
-public final class AstronomicPicturesController {
+public final class GetAstronomicPicturesController {
   private final GetAstronomicPictureUsecase getAstronomicPictureUsecase;
 
-  public AstronomicPicturesController(@NotNull AstronomicPictureUsecaseFactory astronomicPictureUsecaseFactory) {
-    getAstronomicPictureUsecase = astronomicPictureUsecaseFactory.getAstronomicPictureUsecase();
+  public GetAstronomicPicturesController(@NotNull GetAstronomicPictureUsecaseFactory getAstronomicPictureUsecaseFactory) {
+    getAstronomicPictureUsecase = getAstronomicPictureUsecaseFactory.getAstronomicPictureUsecase();
   }
 
   @GetMapping("/{id}")
   public Mono<String> getAstronomicPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long id) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; method: GET; path: /astronomic-pictures/%d", PersonsController.class.getName(), id), AstronomicPicturesController.class);
+      return EitherErrorToJson.execute(eitherError,String.format("rest-controller-class: %s; method: GET; path: /astronomic-pictures/%d", GetAstronomicPicturesController.class.getName(), id), GetAstronomicPicturesController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);

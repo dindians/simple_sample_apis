@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.app.usecase_factories.PersonUsecaseFactory;
+import org.example.simple_sample_apis.app.usecase_factories.GetPersonUsecaseFactory;
 import org.example.simple_sample_apis.usecases.GetPersonUsecase;
 import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
 
 @RestController
 @RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
-public final class PersonsController {
+public final class GetPersonsController {
   private final GetPersonUsecase getPersonUsecase;
 
-  public PersonsController(@NotNull PersonUsecaseFactory personUsecaseFactory) { getPersonUsecase = personUsecaseFactory.getPersonUsecase(); }
+  public GetPersonsController(@NotNull GetPersonUsecaseFactory getPersonUsecaseFactory) { getPersonUsecase = getPersonUsecaseFactory.getPersonUsecase(); }
 
   @GetMapping("/{personId}")
   public Mono<String> getPerson(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons/%d", PersonsController.class.getName(), personId), PersonsController.class);
+      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons/%d", GetPersonsController.class.getName(), personId), GetPersonsController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);

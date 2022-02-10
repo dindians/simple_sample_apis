@@ -8,7 +8,7 @@ import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.usecases.*;
 
 public class PersonWithPictureUsecaseFactoryTest {
-  static class PersonUsecaseFactoryDummyImpl implements PersonUsecaseFactory {
+  static class GetPersonUsecaseFactoryDummyImpl implements GetPersonUsecaseFactory {
 
     @Override
     public GetPersonUsecase getPersonUsecase() {
@@ -16,7 +16,7 @@ public class PersonWithPictureUsecaseFactoryTest {
     }
   }
 
-  static class AstronomicPictureUsecaseFactoryDummyImpl implements AstronomicPictureUsecaseFactory {
+  static class GetAstronomicPictureUsecaseFactoryDummyImpl implements GetAstronomicPictureUsecaseFactory {
 
     @Override
     public GetAstronomicPictureUsecase getAstronomicPictureUsecase() {
@@ -27,15 +27,15 @@ public class PersonWithPictureUsecaseFactoryTest {
   @Test
   void PersonWithPictureUsecaseFactoryNullArguments() {
     assertAll(
-      () -> assertThrows(IllegalArgumentException.class, () -> new PersonWithPictureUsecaseFactory(null, new AstronomicPictureUsecaseFactoryDummyImpl())),
-      () -> assertThrows(IllegalArgumentException.class, () -> new PersonWithPictureUsecaseFactory(new PersonUsecaseFactoryDummyImpl(), null)),
-      () -> assertThrows(IllegalArgumentException.class, () -> new PersonWithPictureUsecaseFactory(null, null))
+      () -> assertThrows(IllegalArgumentException.class, () -> new GetPersonWithPictureUsecaseFactory(null, new GetAstronomicPictureUsecaseFactoryDummyImpl())),
+      () -> assertThrows(IllegalArgumentException.class, () -> new GetPersonWithPictureUsecaseFactory(new GetPersonUsecaseFactoryDummyImpl(), null)),
+      () -> assertThrows(IllegalArgumentException.class, () -> new GetPersonWithPictureUsecaseFactory(null, null))
     );
   }
 
   @Test
   void PersonWithPictureUsecaseFactory() {
-    final var personWithPictureUsecaseFactory = new PersonWithPictureUsecaseFactory(new PersonUsecaseFactoryDummyImpl(), new AstronomicPictureUsecaseFactoryDummyImpl());
+    final var personWithPictureUsecaseFactory = new GetPersonWithPictureUsecaseFactory(new GetPersonUsecaseFactoryDummyImpl(), new GetAstronomicPictureUsecaseFactoryDummyImpl());
     assertAll(
       () -> assertNotNull(personWithPictureUsecaseFactory),
       () -> assertNotNull(personWithPictureUsecaseFactory.getPersonWithPictureUsecase()),

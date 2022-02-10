@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.app.usecase_factories.PersonWithPictureUsecaseFactory;
+import org.example.simple_sample_apis.app.usecase_factories.GetPersonWithPictureUsecaseFactory;
 import org.example.simple_sample_apis.usecases.GetPersonWithPictureUsecase;
 import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
 
 @RestController
 @RequestMapping(value = "/persons-with-picture", produces = MediaType.APPLICATION_JSON_VALUE)
-public final class PersonsWithPictureController {
+public final class GetPersonsWithPictureController {
   private final GetPersonWithPictureUsecase getPersonWithPictureUsecase;
 
-  public PersonsWithPictureController(@NotNull PersonWithPictureUsecaseFactory personWithPictureUsecaseFactory) {
-    getPersonWithPictureUsecase = personWithPictureUsecaseFactory.getPersonWithPictureUsecase();
+  public GetPersonsWithPictureController(@NotNull GetPersonWithPictureUsecaseFactory getPersonWithPictureUsecaseFactory) {
+    getPersonWithPictureUsecase = getPersonWithPictureUsecaseFactory.getPersonWithPictureUsecase();
   }
 
   @GetMapping("/{personId}")
   public Mono<String> getPersonWithPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons-with-picture/%d", PersonsWithPictureController.class.getName(), personId), PersonsWithPictureController.class);
+      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons-with-picture/%d", GetPersonsWithPictureController.class.getName(), personId), GetPersonsWithPictureController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);

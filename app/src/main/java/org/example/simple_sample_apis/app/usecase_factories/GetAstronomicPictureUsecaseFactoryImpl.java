@@ -10,11 +10,11 @@ import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
 import static org.example.simple_sample_apis.app.usecase_factories.JsonSerializer.deserialize;
 
 @Component
-public final class AstronomicPictureUsecaseFactoryImpl implements AstronomicPictureUsecaseFactory {
+public final class GetAstronomicPictureUsecaseFactoryImpl implements GetAstronomicPictureUsecaseFactory {
   private final ConfigValues configValues;
   private final HttpRequest httpRequest;
 
-  public AstronomicPictureUsecaseFactoryImpl(@NotNull ConfigValues configValues, @NotNull HttpRequest httpRequest) {
+  public GetAstronomicPictureUsecaseFactoryImpl(@NotNull ConfigValues configValues, @NotNull HttpRequest httpRequest) {
     this.configValues = configValues;
     this.httpRequest = httpRequest;
   }
@@ -23,7 +23,7 @@ public final class AstronomicPictureUsecaseFactoryImpl implements AstronomicPict
   public GetAstronomicPictureUsecase getAstronomicPictureUsecase() { return new GetAstronomicPictureUsecase(this::getAstronomicPicture); }
 
   private Mono<Either<EitherError, AstronomicPicture>> getAstronomicPicture(long dummyId) {
-    return getJsonFromUri(constructUri(dummyId)).map(eitherErrorOrJson -> eitherErrorOrJson.flatMap(AstronomicPictureUsecaseFactoryImpl::deserializeAstronomicPicture));
+    return getJsonFromUri(constructUri(dummyId)).map(eitherErrorOrJson -> eitherErrorOrJson.flatMap(GetAstronomicPictureUsecaseFactoryImpl::deserializeAstronomicPicture));
   }
 
   private String constructUri(long dummyId) { return configValues.get("astronomic_picture.api.get"); }

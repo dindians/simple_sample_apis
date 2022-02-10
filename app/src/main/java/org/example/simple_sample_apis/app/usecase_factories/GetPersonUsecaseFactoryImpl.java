@@ -11,12 +11,12 @@ import org.example.simple_sample_apis.usecases.GetPersonUsecase;
 import org.example.simple_sample_apis.usecases.Person;
 
 @Component
-public final class PersonUsecaseFactoryImpl implements PersonUsecaseFactory {
+public final class GetPersonUsecaseFactoryImpl implements GetPersonUsecaseFactory {
   @Override
   public GetPersonUsecase getPersonUsecase() { return new GetPersonUsecase(this::getPerson); }
 
   private Mono<Either<EitherError, Person>> getPerson(long personId) {
-    return getPersonFromMemory(personId).map(eitherErrorOrPersonFromMemory -> eitherErrorOrPersonFromMemory.flatMap(PersonUsecaseFactoryImpl::personFromMemoryToPerson));
+    return getPersonFromMemory(personId).map(eitherErrorOrPersonFromMemory -> eitherErrorOrPersonFromMemory.flatMap(GetPersonUsecaseFactoryImpl::personFromMemoryToPerson));
   }
 
   private Mono<Either<EitherError, PersonFromMemory>> getPersonFromMemory(long personId) { return new PersonMemoryService().getPerson(personId); }
