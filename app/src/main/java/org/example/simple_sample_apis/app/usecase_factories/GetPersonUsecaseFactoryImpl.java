@@ -9,6 +9,7 @@ import org.example.simple_sample_apis.services.PersonFromMemory;
 import org.example.simple_sample_apis.services.PersonMemoryService;
 import org.example.simple_sample_apis.usecases.GetPersonUsecase;
 import org.example.simple_sample_apis.usecases.Person;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetPersonUsecaseFactory;
 
 @Component
 public final class GetPersonUsecaseFactoryImpl implements GetPersonUsecaseFactory {

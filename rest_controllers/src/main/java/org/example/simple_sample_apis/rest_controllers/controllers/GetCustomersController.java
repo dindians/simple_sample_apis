@@ -1,7 +1,6 @@
 package org.example.simple_sample_apis.rest_controllers.controllers;
 
 import java.util.function.Function;
-
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpStatus;

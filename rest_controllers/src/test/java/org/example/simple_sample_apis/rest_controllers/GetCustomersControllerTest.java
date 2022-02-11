@@ -9,15 +9,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = "spring.main.web-application-type=reactive", webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class GetCustomerControllerTest {
+public class GetCustomersControllerTest {
   @Autowired
   private WebTestClient webClient;
 
-  static class ResponseCustomer {
+  static class CustomerResponse {
     private Integer id;
     public Integer getId() { return id; }
   }
-
 
   @Test
   void getCustomerSucceeds() {
@@ -31,10 +30,10 @@ public class GetCustomerControllerTest {
           () -> assertTrue(customerJson.contains(customerId + ""))
         );
         try {
-          var responseCustomer = (new ObjectMapper()).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(customerJson, ResponseCustomer.class);
+          var customerResponse = (new ObjectMapper()).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(customerJson, CustomerResponse.class);
           assertAll(
-            () -> assertNotNull(responseCustomer),
-            () -> assertEquals(customerId, responseCustomer.id)
+            () -> assertNotNull(customerResponse),
+            () -> assertEquals(customerId, customerResponse.id)
           );
         }
         catch (Exception exception) {
