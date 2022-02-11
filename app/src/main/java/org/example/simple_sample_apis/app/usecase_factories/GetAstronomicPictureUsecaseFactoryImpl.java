@@ -8,6 +8,7 @@ import org.example.simple_sample_apis.http_client.HttpRequest;
 import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
 import static org.example.simple_sample_apis.app.usecase_factories.JsonSerializer.deserialize;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetAstronomicPictureUsecaseFactory;
 
 @Component
 public final class GetAstronomicPictureUsecaseFactoryImpl implements GetAstronomicPictureUsecaseFactory {

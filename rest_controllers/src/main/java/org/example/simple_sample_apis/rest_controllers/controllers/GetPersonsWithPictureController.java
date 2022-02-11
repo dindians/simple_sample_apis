@@ -1,4 +1,4 @@
-package org.example.simple_sample_apis.app.controllers;
+package org.example.simple_sample_apis.rest_controllers.controllers;
 
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.app.usecase_factories.GetPersonWithPictureUsecaseFactory;
 import org.example.simple_sample_apis.usecases.GetPersonWithPictureUsecase;
-import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetPersonWithPictureUsecaseFactory;
+import org.example.simple_sample_apis.rest_controllers.ControllerResponses;
+import org.example.simple_sample_apis.rest_controllers.CreateHttpStatus;
+import org.example.simple_sample_apis.rest_controllers.EitherErrorToJson;
 
 @RestController
 @RequestMapping(value = "/persons-with-picture", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +29,7 @@ public final class GetPersonsWithPictureController {
   @GetMapping("/{personId}")
   public Mono<String> getPersonWithPicture(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable long personId) {
     Function<EitherError, String> failureResponse = eitherError -> {
-      serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
+      serverHttpResponse.setStatusCode(CreateHttpStatus.httpStatusFromEitherError(eitherError));
       return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: GET; path: /persons-with-picture/%d", GetPersonsWithPictureController.class.getName(), personId), GetPersonsWithPictureController.class);
     };
     Function<String, String> successResponse = json -> {
