@@ -23,16 +23,16 @@ public final class PersonsControllersTest {
   static class PersonError {
     static class Error {
       static class Cause {
-        static class PersonMappingError {
+        static class PersonMemoryServiceError {
           private Integer personId;
           private String errorText;
 
           public Integer getPersonId() { return personId; }
           public String getErrorText() { return errorText; }
         }
-        private PersonMappingError personMappingError;
+        private PersonMemoryServiceError personMemoryServiceError;
 
-        public Cause.PersonMappingError getPersonMappingError() { return personMappingError; }
+        public PersonMemoryServiceError getPersonMemoryServiceError() { return personMemoryServiceError; }
       }
       private String context;
       private String type;
@@ -52,7 +52,7 @@ public final class PersonsControllersTest {
 
   @Test
   void getPersonOk() {
-    final var personId = 14L;
+    final var personId = 16L;
     webClient.get().uri("/persons/" + personId)
       .exchange()
       .expectStatus().isOk()
@@ -85,8 +85,8 @@ public final class PersonsControllersTest {
             () -> assertNotNull(personError),
             () -> assertNotNull(personError.getError()),
             () -> assertNotNull(personError.getError().getCause()),
-            () -> assertNotNull(personError.getError().getCause().getPersonMappingError()),
-            () -> assertEquals(personId, personError.getError().getCause().getPersonMappingError().getPersonId())
+            () -> assertNotNull(personError.getError().getCause().getPersonMemoryServiceError()),
+            () -> assertEquals(personId, personError.getError().getCause().getPersonMemoryServiceError().getPersonId())
           );
         }
         catch (Exception exception) {

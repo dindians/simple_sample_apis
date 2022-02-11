@@ -7,7 +7,7 @@ import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.fp.Unit;
 import org.example.simple_sample_apis.r2dbc.repositories.DbCustomersRepository;
-import org.example.simple_sample_apis.rest_controllers.DeleteCustomerUsecaseFactory;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.DeleteCustomerUsecaseFactory;
 import org.example.simple_sample_apis.usecases.DeleteCustomerUsecase;
 
 @Component

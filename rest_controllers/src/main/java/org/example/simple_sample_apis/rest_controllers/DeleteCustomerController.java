@@ -1,8 +1,6 @@
 package org.example.simple_sample_apis.rest_controllers;
 
 import java.util.function.Function;
-
-import org.example.simple_sample_apis.fp.Unit;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.usecases.DeleteCustomerUsecase;
 import static org.example.simple_sample_apis.rest_controllers.CreateHttpStatus.httpStatusFromEitherError;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.DeleteCustomerUsecaseFactory;
 
 @RestController
 @RequestMapping(value = "/customers", produces = MediaType.APPLICATION_JSON_VALUE)

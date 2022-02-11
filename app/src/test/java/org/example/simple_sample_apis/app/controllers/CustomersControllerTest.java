@@ -26,8 +26,8 @@ public final class CustomersControllerTest {
     final var customerId = -1;
     webClient.get().uri("/customers/" + customerId)
       .exchange()
-      .expectStatus().isOk()
-      .expectBody(String.class).value(Assertions::assertNull);
+      .expectStatus().isNotFound()
+      .expectBody(String.class).value(Assertions::assertNotNull);
   }
 
   @Test

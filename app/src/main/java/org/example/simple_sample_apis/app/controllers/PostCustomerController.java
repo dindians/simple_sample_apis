@@ -3,10 +3,10 @@ package org.example.simple_sample_apis.app.controllers;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public final class PostCustomerController {
   public Mono<String> postCustomer(@NotNull ServerHttpResponse serverHttpResponse, @RequestBody Mono<NewCustomer> monoNewCustomer) {
     Function<EitherError, String> failureResponse = eitherError -> {
       serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
-      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: POST; path: /customers", GetCustomersController.class.getName()), GetCustomersController.class);
+      return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: POST; path: /customers", PostCustomerController.class.getName()), PostCustomerController.class);
     };
     Function<String, String> successResponse = json -> {
       serverHttpResponse.setStatusCode(HttpStatus.OK);
