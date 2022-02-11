@@ -7,10 +7,10 @@ import org.example.simple_sample_apis.fp.*;
 import org.example.simple_sample_apis.http_client.HttpRequest;
 import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.example.simple_sample_apis.usecases.GetAstronomicPictureUsecase;
-import static org.example.simple_sample_apis.app.JsonSerializer.deserialize;
-import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetAstronomicPictureUsecaseFactory;
 import org.example.simple_sample_apis.app.ConfigValues;
 import org.example.simple_sample_apis.app.HttpResponseMethods;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetAstronomicPictureUsecaseFactory;
+import static org.example.simple_sample_apis.rest_controllers.JsonSerializer.deserialize;
 
 @Component
 public final class GetAstronomicPictureUsecaseFactoryImpl implements GetAstronomicPictureUsecaseFactory {

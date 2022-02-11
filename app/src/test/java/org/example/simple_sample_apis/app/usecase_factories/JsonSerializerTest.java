@@ -1,12 +1,11 @@
 package org.example.simple_sample_apis.app.usecase_factories;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.example.simple_sample_apis.app.JsonDeserializationError;
-import org.example.simple_sample_apis.app.JsonSerializer;
-import org.example.simple_sample_apis.fp.Either;
-import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.example.simple_sample_apis.fp.Either;
+import org.example.simple_sample_apis.rest_controllers.JsonSerializer;
+import org.example.simple_sample_apis.usecases.AstronomicPicture;
 
 public class JsonSerializerTest {
   @Test
@@ -79,9 +78,9 @@ public class JsonSerializerTest {
       usecaseError -> {
         assertAll(
           () -> assertNotNull(usecaseError),
-          () -> assertTrue(usecaseError instanceof JsonDeserializationError)
+          () -> assertTrue(usecaseError instanceof JsonSerializer.JsonDeserializationError)
         );
-        final var jsonDeserializationError = (JsonDeserializationError)usecaseError;
+        final var jsonDeserializationError = (JsonSerializer.JsonDeserializationError)usecaseError;
         assertAll(
           () -> assertNotNull(jsonDeserializationError),
           () -> assertEquals(astronomicPictureJson, jsonDeserializationError.getJson()),
@@ -101,7 +100,6 @@ public class JsonSerializerTest {
         return true;
       }
     );
-
   }
 
   @Test

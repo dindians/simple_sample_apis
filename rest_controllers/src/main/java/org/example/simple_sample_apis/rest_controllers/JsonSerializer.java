@@ -7,7 +7,7 @@ import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.fp.EitherError;
 
 public final class JsonSerializer {
-  static final class JsonSerializationError implements EitherError {
+  public static final class JsonSerializationError implements EitherError {
     private final String json;
     private final String exceptionType;
     private final Exception exception;
@@ -22,22 +22,22 @@ public final class JsonSerializer {
     public String getExceptionType() { return exceptionType; }
     public Exception getException() { return exception; }
   }
-  static final class JsonDeserializationError implements EitherError {
+  public static final class JsonDeserializationError implements EitherError {
     private final String json;
     private final Exception exception;
 
-    JsonDeserializationError(String json, Exception exception) {
+    public JsonDeserializationError(String json, Exception exception) {
       this.json = json;
       this.exception = exception;
     }
 
-    String getJson() { return json; }
-    Exception getException() { return exception; }
+    public String getJson() { return json; }
+    public Exception getException() { return exception; }
   }
 
-  static <T> Either<EitherError, T> deserialize(String json, @NotNull Class<T> valueType) { return deserialize(json, valueType, false); }
+  public static <T> Either<EitherError, T> deserialize(String json, @NotNull Class<T> valueType) { return deserialize(json, valueType, false); }
 
-  static <T> Either<EitherError, T> deserialize(String json, @NotNull Class<T> valueType, Boolean failOnUnknowProperties) {
+  public static <T> Either<EitherError, T> deserialize(String json, @NotNull Class<T> valueType, Boolean failOnUnknowProperties) {
     try {
       return Either.right((new ObjectMapper()).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, failOnUnknowProperties).readValue(json, valueType));
     }
@@ -46,6 +46,7 @@ public final class JsonSerializer {
     }
   }
 
+  //todo only the function is used in the rest_controllers module. Push this class back to the app module.
   public static Either<EitherError, String> serialize(Object value) {
     try {
       return Either.right(new ObjectMapper().writeValueAsString(value));
