@@ -1,4 +1,4 @@
-package org.example.simple_sample_apis.rest_controllers;
+package org.example.simple_sample_apis.rest_controllers.controllers;
 
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.usecases.DeleteCustomerUsecase;
-import static org.example.simple_sample_apis.rest_controllers.CreateHttpStatus.httpStatusFromEitherError;
 import org.example.simple_sample_apis.rest_controllers.usecase_factories.DeleteCustomerUsecaseFactory;
+import org.example.simple_sample_apis.rest_controllers.ControllerResponses;
+import org.example.simple_sample_apis.rest_controllers.EitherErrorToJson;
+import org.example.simple_sample_apis.rest_controllers.CreateHttpStatus;
 
 @RestController
 @RequestMapping(value = "/customers", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,7 +27,7 @@ public class DeleteCustomerController {
   @DeleteMapping("/{customerId}")
   public Mono<String> deleteCustomer(@NotNull ServerHttpResponse serverHttpResponse, @PathVariable Integer customerId) {
     Function<EitherError, String> failureResponse = eitherError -> {
-      serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
+      serverHttpResponse.setStatusCode(CreateHttpStatus.httpStatusFromEitherError(eitherError));
       return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: POST; path: /customers", DeleteCustomerController.class.getName()), DeleteCustomerController.class);
     };
     Function<String, String> successResponse = json -> {

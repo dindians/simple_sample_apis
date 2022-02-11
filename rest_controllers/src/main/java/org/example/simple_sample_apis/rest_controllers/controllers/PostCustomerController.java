@@ -1,4 +1,4 @@
-package org.example.simple_sample_apis.app.controllers;
+package org.example.simple_sample_apis.rest_controllers.controllers;
 
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
-import org.example.simple_sample_apis.app.usecase_factories.SaveCustomerUsecaseFactory;
 import org.example.simple_sample_apis.usecases.SaveCustomerUsecase;
 import org.example.simple_sample_apis.usecases.Customer;
-import static org.example.simple_sample_apis.app.controllers.CreateHttpStatus.httpStatusFromEitherError;
+import org.example.simple_sample_apis.rest_controllers.usecase_factories.SaveCustomerUsecaseFactory;
+import org.example.simple_sample_apis.rest_controllers.ControllerResponses;
+import org.example.simple_sample_apis.rest_controllers.CreateHttpStatus;
+import org.example.simple_sample_apis.rest_controllers.EitherErrorToJson;
 
 @RestController
 @RequestMapping(value = "/customers", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -38,7 +40,7 @@ public final class PostCustomerController {
   @PostMapping
   public Mono<String> postCustomer(@NotNull ServerHttpResponse serverHttpResponse, @RequestBody Mono<NewCustomer> monoNewCustomer) {
     Function<EitherError, String> failureResponse = eitherError -> {
-      serverHttpResponse.setStatusCode(httpStatusFromEitherError(eitherError));
+      serverHttpResponse.setStatusCode(CreateHttpStatus.httpStatusFromEitherError(eitherError));
       return EitherErrorToJson.execute(eitherError, String.format("rest-controller-class: %s; method: POST; path: /customers", PostCustomerController.class.getName()), PostCustomerController.class);
     };
     Function<String, String> successResponse = json -> {

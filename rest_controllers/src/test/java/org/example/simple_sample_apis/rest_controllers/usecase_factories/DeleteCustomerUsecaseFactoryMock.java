@@ -5,11 +5,10 @@ import org.springframework.stereotype.Component;
 import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.fp.Unit;
-import org.example.simple_sample_apis.rest_controllers.usecase_factories.DeleteCustomerUsecaseFactory;
 import org.example.simple_sample_apis.usecases.DeleteCustomerUsecase;
 
 @Component
-public class DeleteCustomerUsecaseFactoryDummyImpl implements DeleteCustomerUsecaseFactory {
+public class DeleteCustomerUsecaseFactoryMock implements DeleteCustomerUsecaseFactory {
   @Override
   public DeleteCustomerUsecase deleteCustomerUSecase() {
     return new DeleteCustomerUsecase(this::deleteCustomerById);

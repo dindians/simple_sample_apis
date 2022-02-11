@@ -5,8 +5,8 @@ import org.example.simple_sample_apis.fp.EntityNotFound;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 
-final class CreateHttpStatus {
-  static HttpStatus httpStatusFromEitherError(@NotNull EitherError eitherError) {
+public final class CreateHttpStatus {
+  public static HttpStatus httpStatusFromEitherError(@NotNull EitherError eitherError) {
     return (eitherError instanceof HasHttpStatusCode) ?
       HttpStatus.valueOf(((HasHttpStatusCode) eitherError).getHttpStatusCode()) :
       (eitherError instanceof EntityNotFound) ?

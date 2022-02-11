@@ -1,6 +1,7 @@
-package org.example.simple_sample_apis.rest_controllers;
+package org.example.simple_sample_apis.rest_controllers.controllers;
 
 import java.util.function.Function;
+
 import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.example.simple_sample_apis.fp.EitherError;
 import org.example.simple_sample_apis.usecases.GetCustomerUsecase;
 import org.example.simple_sample_apis.rest_controllers.usecase_factories.GetCustomerUsecaseFactory;
+import org.example.simple_sample_apis.rest_controllers.ControllerResponses;
+import org.example.simple_sample_apis.rest_controllers.CreateHttpStatus;
+import org.example.simple_sample_apis.rest_controllers.EitherErrorToJson;
 
 @RestController
 @RequestMapping(value = "/customers", produces = MediaType.APPLICATION_JSON_VALUE)

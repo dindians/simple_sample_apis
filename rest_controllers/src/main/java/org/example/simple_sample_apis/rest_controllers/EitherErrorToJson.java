@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.example.simple_sample_apis.fp.EitherError;
 
-final class EitherErrorToJson {
-  static <T> String execute(@NotNull EitherError eitherError, String context, @NotNull Class<T> clazz) {
+public final class EitherErrorToJson {
+  public static <T> String execute(@NotNull EitherError eitherError, String context, @NotNull Class<T> clazz) {
     String errorText = eitherError.toString();
     if(context != null) { errorText += String.format("\n(context: %s)", context); }
     Exception errorException = null;
