@@ -20,6 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
+            <artifactId>rest_controllers</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
             <artifactId>fp</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>

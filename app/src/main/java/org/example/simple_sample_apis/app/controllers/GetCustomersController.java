@@ -34,6 +34,6 @@ public final class GetCustomersController {
     };
     return getCustomerUsecase.getCustomer()
       .apply(customerId)
-      .map(eitherErrorPerson -> ControllerResponses.jsonResponse(eitherErrorPerson, failureResponse, successResponse));
+      .map(eitherErrorOrCustomer -> ControllerResponses.jsonResponse(eitherErrorOrCustomer, failureResponse, successResponse));
   }
 }

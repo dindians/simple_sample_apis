@@ -28,6 +28,10 @@ public class DbCustomersRepository {
     return dbCustomersR2dbcRepository.saveAll(StreamSupport.stream(dbCustomers.spliterator(), false).map(this::dbCustomerToDbCustomerImpl).collect(Collectors.toList())).map(this::dbCustomerImplToDbCustomer);
   }
 
+  public Mono<Void> deleteDbCustomerById(Integer customerId) {
+    return dbCustomersR2dbcRepository.deleteById(customerId);
+  }
+
   public Mono<DbCustomer> getDbCustomerById(Integer customerId) {
     return dbCustomersR2dbcRepository.findById(customerId).map(this::dbCustomerImplToDbCustomer);
   }
