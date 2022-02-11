@@ -4,6 +4,6 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "barbara",
+  "name": "some-one",
   "age": 45
 }

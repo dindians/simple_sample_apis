@@ -1,9 +1,9 @@
-package org.example.simple_sample_apis.app.usecase_factories;
+package org.example.simple_sample_apis.app;
 
 import org.jetbrains.annotations.NotNull;
 import org.example.simple_sample_apis.fp.EitherError;
 
-final class HttpResponseNotOk implements EitherError, HasHttpStatusCode {
+public final class HttpResponseNotOk implements EitherError, HasHttpStatusCode {
   private final String uri;
   private final Integer httpStatusCode;
   private final String body;

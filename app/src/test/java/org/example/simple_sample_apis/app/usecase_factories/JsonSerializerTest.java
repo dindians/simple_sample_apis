@@ -1,6 +1,8 @@
 package org.example.simple_sample_apis.app.usecase_factories;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.example.simple_sample_apis.app.JsonDeserializationError;
+import org.example.simple_sample_apis.app.JsonSerializer;
 import org.example.simple_sample_apis.fp.Either;
 import org.example.simple_sample_apis.usecases.AstronomicPicture;
 import org.junit.jupiter.api.Test;

@@ -3,8 +3,8 @@ package org.example.simple_sample_apis.app.usecase_factories;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.example.simple_sample_apis.fp.Either;
-import org.example.simple_sample_apis.http_client.HttpResponseFailure;
-import org.example.simple_sample_apis.http_client.HttpResponseSuccess;
+import org.example.simple_sample_apis.http_client.*;
+import org.example.simple_sample_apis.app.*;
 
 class HttpResponseMethodsTest {
   @Test

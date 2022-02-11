@@ -1,9 +1,9 @@
-package org.example.simple_sample_apis.app.usecase_factories;
+package org.example.simple_sample_apis.app;
 
 import org.jetbrains.annotations.NotNull;
 import org.example.simple_sample_apis.fp.EitherError;
 
-final class JsonSerializationError implements EitherError {
+public final class JsonSerializationError implements EitherError {
   private final String json;
   private final String exceptionType;
   private final Exception exception;

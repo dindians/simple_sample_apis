@@ -3,7 +3,6 @@ package org.example.simple_sample_apis.app;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.example.simple_sample_apis.app.usecase_factories.ConfigValues;
 
 @Component
 final class EnvironmentVariables implements ConfigValues {
